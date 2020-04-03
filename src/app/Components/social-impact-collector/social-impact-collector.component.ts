@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { UploadService } from 'src/app/upload.service';
 
@@ -9,7 +9,7 @@ declare var MediaRecorder: any;
   templateUrl: './social-impact-collector.component.html',
   styleUrls: ['./social-impact-collector.component.css']
 })
-export class SocialImpactCollectorComponent implements OnInit {
+export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
 
   hideVideo: boolean;
 
@@ -20,6 +20,7 @@ export class SocialImpactCollectorComponent implements OnInit {
   recordedStream = [];
   mediaRecorder: any;
   recordedBlob: Blob;
+  hideRecoredVideo: boolean;
 
   constructor(private dom: DomSanitizer,
               private cd: ChangeDetectorRef,
@@ -27,6 +28,7 @@ export class SocialImpactCollectorComponent implements OnInit {
 
   ngOnInit(): void {
     this.hideVideo = true;
+    this.hideRecoredVideo = true;
   }
 
   ngAfterViewInit() {
@@ -36,10 +38,14 @@ export class SocialImpactCollectorComponent implements OnInit {
 
 
   startRecording() {
-    this.hideVideo = false;
-    this.mediaRecorder.start();
-    console.log(this.mediaRecorder.state);
-    console.log('recorder started');
+    this.startCamera();
+    setTimeout(() => {
+      this.hideVideo = false;
+      this.mediaRecorder.start();
+      console.log(this.mediaRecorder.state);
+      console.log('recorder started');
+    }, 3000);
+
   }
 
   stopRecording() {
@@ -64,6 +70,7 @@ export class SocialImpactCollectorComponent implements OnInit {
           this.recordedStream = [];
           const videoURL = URL.createObjectURL(this.recordedBlob);
           this.recordVideo.src = videoURL;
+          this.hideRecoredVideo = false;
           this.recordVideo.play();
           this.cd.detectChanges();
         };

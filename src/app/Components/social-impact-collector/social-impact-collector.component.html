@@ -1,5 +1,5 @@
 <div class="title">
-  <h1>Social Impact of Covid 19</h1>
+  <h3>Social Impact of Covid 19</h3>
 </div>
 <div class="form-container">
   <div class="card">
@@ -20,22 +20,21 @@
       <div [hidden]="hideVideo" class="form-group">
         <video #videoElement controls autoplay="true" [muted]="'muted'"></video>
       </div>
-      <div [hidden]="!hideVideo" class="form-group">
+      <div [hidden]="hideRecoredVideo" class="form-group">
         <video #recordedVideoElement controls></video>
       </div>
     </form>
     <div class="action-container">
-      <div class="form-group">
-        <button class="btn btn-primary" (click)="startCamera()">Start Camera</button>
-      </div>
       <div  *ngIf="hideVideo" class="form-group">
-        <button class="btn btn-danger" (click)="startRecording()">Start Recording</button>
+        <button class="btn btn-danger btn-sm" (click)="startRecording()">
+          Start Recording
+        </button>
       </div>
       <div *ngIf="!hideVideo" class="form-group pr-2">
-        <button class="btn btn-primary" (click)="stopRecording()">Stop Recording</button>
+        <button class="btn btn-primary btn-sm" (click)="stopRecording()">Stop Recording</button>
       </div>
-      <div *ngIf="hideVideo" class="form-group pr-2">
-        <button class="btn btn-primary" (click)="submit()">Submit</button>
+      <div *ngIf="!hideRecoredVideo" class="form-group pr-2">
+        <button class="btn btn-primary btn-sm" (click)="submit()">Submit</button>
       </div>
     </div>
   </div>
