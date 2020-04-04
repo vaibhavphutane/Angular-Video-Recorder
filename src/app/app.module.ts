@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { SocialImpactComponent } from './Components/social-impact/social-impact.component';
 import { SocialImpactCollectorComponent } from './Components/social-impact-collector/social-impact-collector.component';
 import { HttpClientModule } from '@angular/common/http';
-
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,7 +17,8 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

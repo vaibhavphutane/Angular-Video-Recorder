@@ -52,3 +52,12 @@ video {
    background: #65c9f9;
   border: none;
 }
+
+
+.drop-down {
+  height: 25px;
+  color: #fff;
+  background: blue;
+  width: 100px;
+  border-radius: 3px;
+}

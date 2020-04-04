@@ -12,7 +12,6 @@ declare var MediaRecorder: any;
 export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
 
   hideVideo: boolean;
-
   @ViewChild('videoElement') videoElement: any;
   @ViewChild('recordedVideoElement') recordedVideoElement: any;
   video: any;
