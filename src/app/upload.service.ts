@@ -14,6 +14,6 @@ export class UploadService {
     const file = new File([recordedBlob], 'recording');
     fd.append('data', file);
     console.log(fd);
-    return this.http.post('http://localhost:3000/api/upload', fd);
+    return this.http.post('http://localhost/FileUpload/FUpload.svc/Upload/', fd);
   }
 }
