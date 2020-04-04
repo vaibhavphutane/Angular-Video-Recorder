@@ -20,6 +20,8 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
   mediaRecorder: any;
   recordedBlob: Blob;
   hideRecoredVideo: boolean;
+  phone: string;
+  email: string;
 
   constructor(private dom: DomSanitizer,
               private cd: ChangeDetectorRef,
@@ -84,7 +86,12 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
   }
 
   submit() {
-    this.uploadService.uploadVideo(this.recordedBlob).subscribe(res => {
+    const payload = {
+      email: this.email,
+      phone: this.phone,
+      videoBlob: this.recordedBlob
+    };
+    this.uploadService.uploadVideo(payload).subscribe(res => {
       console.log(res);
     });
   }

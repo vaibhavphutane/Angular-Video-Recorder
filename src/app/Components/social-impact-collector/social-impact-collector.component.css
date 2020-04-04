@@ -34,7 +34,7 @@ label {
 }
 
 .form-control {
-  width: 60%;
+  width: 35%;
 }
 
 
@@ -48,6 +48,9 @@ video {
   justify-content: left;
 }
 
+.btn {
+  margin-right: 10px;
+}
 .btn-primary {
    background: #65c9f9;
   border: none;
@@ -60,4 +63,16 @@ video {
   background: blue;
   width: 100px;
   border-radius: 3px;
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    text-align: center;
+  }
+  .form-control {
+  width: 90%;
+  }
+  video {
+    height: 205px;
+  }
 }

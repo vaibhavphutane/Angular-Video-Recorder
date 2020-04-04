@@ -13,8 +13,12 @@
  </p>
   <form>
     <div class="form-group">
-      <label for="email">Email</label>
-      <input id="email" class="form-control" type="email">
+      <label  for="email">Email</label>
+      <input name="email" [(ngModel)]="email" id="email" class="form-control" type="email">
+    </div>
+    <div class="form-group">
+      <label for="phoneNumber">Phone</label>
+      <input name="phone" [(ngModel)]="phone" id="phoneNumber" maxLength=10  class="form-control" type="text">
     </div>
     <div [hidden]="hideVideo" class="form-group">
       <video #videoElement controls autoplay="true" [muted]="'muted'"></video>
@@ -35,8 +39,5 @@
     <div *ngIf="!hideRecoredVideo" class="form-group pr-2">
       <button class="btn btn-primary btn-sm" (click)="submit()">Submit</button>
     </div>
-
   </div>
 </div>
-
-
