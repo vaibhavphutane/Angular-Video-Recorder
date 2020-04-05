@@ -87,7 +87,6 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
   submit() {
     const payload = {
       email: this.email,
-      // phone: this.phone,
       videoBlob: this.recordedBlob
     };
     this.uploadService.uploadVideo(payload).subscribe(res => {
