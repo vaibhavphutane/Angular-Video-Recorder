@@ -14,9 +14,8 @@ export class UploadService {
     // const file = new File([payload.videoBlob], 'recording');
     fd.append('video', payload.videoBlob, 'video.mp4');
     fd.append('email', payload.email);
-    fd.append('phone', payload.phone);
+    // fd.append('phone', payload.phone);
     console.log(fd);
     return this.http.post('http://localhost:80/FileUpload/FUpload.svc/Upload/', fd);
-    // return this.http.post('http://localhost:3000/upload', fd);
   }
 }
