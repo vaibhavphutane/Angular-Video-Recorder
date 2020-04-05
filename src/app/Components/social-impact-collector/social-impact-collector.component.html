@@ -24,10 +24,10 @@
       <input name="phone" [(ngModel)]="phone" id="phoneNumber" maxLength=10  class="form-control" type="text">
     </div> -->
     <div [hidden]="hideVideo" class="form-group">
-      <video id="recordingVideo" #videoElement controls autoplay="true" [muted]="'muted'"></video>
+      <video id="recordingVideo" #videoElement controls  [muted]="'muted'"></video>
     </div>
     <div [hidden]="hideRecoredVideo" class="form-group">
-      <video #recordedVideoElement controls></video>
+      <video #recordedVideoElement  controls></video>
     </div>
   </form>
   <div class="action-container">
@@ -41,6 +41,9 @@
     </div>
     <div *ngIf="!hideRecoredVideo" class="form-group pr-2">
       <button class="btn btn-primary btn-sm" (click)="submit()">Submit</button>
+    </div>
+    <div  *ngIf="!hideVideo" [ngClass]="{'count-down': (60 - timer) < 10 }">
+      Time Remaining: {{60 - timer}}
     </div>
   </div>
 </div>

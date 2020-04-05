@@ -9,13 +9,10 @@ export class UploadService {
   constructor(private http: HttpClient) { }
 
   uploadVideo(payload: any) {
-    console.log(payload);
     const fd = new FormData();
-    // const file = new File([payload.videoBlob], 'recording');
     fd.append('video', payload.videoBlob, 'video.mp4');
     fd.append('email', payload.email);
-    // fd.append('phone', payload.phone);
-    console.log(fd);
+    fd.append('duration', String(payload.duration - 1));
     return this.http.post('http://localhost:80/FileUpload/FUpload.svc/Upload/', fd);
   }
 }

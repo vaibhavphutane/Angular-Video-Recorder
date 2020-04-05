@@ -22,12 +22,16 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
   hideRecoredVideo: boolean;
   phone: string;
   email: string;
+  timer: number;
+  timerCounter: any;
+  clear: boolean;
 
   constructor(private dom: DomSanitizer,
               private cd: ChangeDetectorRef,
               private uploadService: UploadService) { }
 
   ngOnInit(): void {
+    this.timer = 0;
     this.hideVideo = true;
     this.hideRecoredVideo = true;
   }
@@ -43,16 +47,15 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
     setTimeout(() => {
       this.hideVideo = false;
       this.mediaRecorder.start();
-      console.log(this.mediaRecorder.state);
-      console.log('recorder started');
+      this.increment();
     }, 3000);
   }
 
   stopRecording() {
+    this.clear = true;
     this.hideVideo = true;
     this.mediaRecorder.stop();
-    console.log(this.mediaRecorder.state);
-    console.log('recorder started');
+    this.video.pause();
   }
 
   startCamera() {
@@ -64,8 +67,10 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
       stream => {
         this.video.srcObject = stream;
         this.video.play();
-        this.mediaRecorder = new MediaRecorder(stream);
+        const options = { mimeType: 'video/webm;codecs=h264' };
+        this.mediaRecorder = new MediaRecorder(stream, options);
         this.mediaRecorder.onstop = e => {
+          this.video.pause();
           this.recordedBlob = new Blob(this.recordedStream, { type: 'video/mp4' });
           this.recordedStream = [];
           const videoURL = URL.createObjectURL(this.recordedBlob);
@@ -87,10 +92,27 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
   submit() {
     const payload = {
       email: this.email,
-      videoBlob: this.recordedBlob
+      videoBlob: this.recordedBlob,
+      duration: this.timer
     };
     this.uploadService.uploadVideo(payload).subscribe(res => {
       console.log(res);
     });
+  }
+
+
+  increment() {
+    this.timerCounter = setTimeout(() => {
+      this.timer++;
+      if (this.timer === 60) {
+        this.stopRecording();
+      }
+      if (this.clear) {
+        clearTimeout(this.timerCounter);
+      } else {
+        this.increment();
+      }
+    }, 1000);
+
   }
 }
