@@ -21,7 +21,7 @@
       <input name="phone" [(ngModel)]="phone" id="phoneNumber" maxLength=10  class="form-control" type="text">
     </div>
     <div [hidden]="hideVideo" class="form-group">
-      <video #videoElement controls autoplay="true" [muted]="'muted'"></video>
+      <video id="recordingVideo" #videoElement controls autoplay="true" [muted]="'muted'"></video>
     </div>
     <div [hidden]="hideRecoredVideo" class="form-group">
       <video #recordedVideoElement controls></video>
@@ -34,7 +34,7 @@
       </button>
     </div>
     <div *ngIf="!hideVideo" class="form-group pr-2">
-      <button class="btn btn-primary btn-sm" (click)="stopRecording()">Stop Recording</button>
+      <button id="stopRecordingId" class="btn btn-primary btn-sm" (click)="stopRecording()">Stop Recording</button>
     </div>
     <div *ngIf="!hideRecoredVideo" class="form-group pr-2">
       <button class="btn btn-primary btn-sm" (click)="submit()">Submit</button>

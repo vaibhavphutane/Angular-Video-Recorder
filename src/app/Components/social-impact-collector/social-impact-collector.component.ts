@@ -46,7 +46,6 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
       console.log(this.mediaRecorder.state);
       console.log('recorder started');
     }, 3000);
-
   }
 
   stopRecording() {
@@ -67,7 +66,7 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
         this.video.play();
         this.mediaRecorder = new MediaRecorder(stream);
         this.mediaRecorder.onstop = e => {
-          this.recordedBlob = new Blob(this.recordedStream, { type: 'video/webm' });
+          this.recordedBlob = new Blob(this.recordedStream, { type: 'video/mp4' });
           this.recordedStream = [];
           const videoURL = URL.createObjectURL(this.recordedBlob);
           this.recordVideo.src = videoURL;
