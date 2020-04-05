@@ -1,8 +1,9 @@
 .title {
   background: #212121;
-  padding: 15px;
+  background: url('../../../assets/covid19_crop.png');
+  padding: 20px;
   text-align: left;
-  color: #f6f6f6;
+  color: black;
 }
 
 .form-container {
