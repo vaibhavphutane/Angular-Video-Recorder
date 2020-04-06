@@ -9,20 +9,25 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { FooterComponent } from './Components/footer/footer.component';
 import { HeaderComponent } from './Components/header/header.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatDialogModule} from '@angular/material/dialog';
+import { VideoGuidelineComponent } from './Components/video-guideline/video-guideline.component';
 @NgModule({
   declarations: [
     AppComponent,
     SocialImpactComponent,
     SocialImpactCollectorComponent,
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
+    VideoGuidelineComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

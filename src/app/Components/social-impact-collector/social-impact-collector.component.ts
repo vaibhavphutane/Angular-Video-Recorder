@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild, ChangeDetectorRef, AfterViewInit, Element
 import { DomSanitizer } from '@angular/platform-browser';
 import { UploadService } from 'src/app/upload.service';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { VideoGuidelineComponent } from '../video-guideline/video-guideline.component';
 
 declare var MediaRecorder: any;
 
@@ -32,7 +34,8 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
   constructor(private dom: DomSanitizer,
               private cd: ChangeDetectorRef,
               private uploadService: UploadService,
-              private router: Router ) { }
+              private router: Router,
+              private dialog: MatDialog ) { }
 
   ngOnInit(): void {
     this.timer = 0;
@@ -47,13 +50,17 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
 
 
   startRecording() {
-    this.startCamera();
-    setTimeout(() => {
-      this.hideVideo = false;
-      this.mediaRecorder.start();
-      this.increment();
-      this.footer.nativeElement.scrollIntoView({behavior: 'smooth'});
-    }, 3000);
+    this.dialog.open(VideoGuidelineComponent).afterClosed().subscribe(res => {
+      if (res) {
+        this.startCamera();
+        setTimeout(() => {
+          this.hideVideo = false;
+          this.mediaRecorder.start();
+          this.increment();
+          this.footer.nativeElement.scrollIntoView({behavior: 'smooth'});
+        }, 3000);
+      }
+    });
   }
 
   stopRecording() {

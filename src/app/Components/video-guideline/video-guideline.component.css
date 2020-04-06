@@ -1,0 +1,26 @@
+.dialog-container {
+  font-size: 16px;
+}
+
+.guideline {
+  padding: 5px;
+}
+
+.action-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+.btn {
+  margin: 10px;
+}
+
+/deep/ .mat-dialog-container {
+  border-radius: 0px;
+  background: #111;
+  color: #f6f6f6;
+}
+
+h5 {
+  text-align: center;
+}
