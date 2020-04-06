@@ -1,0 +1,13 @@
+.title {
+  background: #212121;
+  background: url('../../../assets/covid19_new_image.png');
+  padding: 15px;
+  text-align: center;
+  color: #f6f6f6;
+}
+
+h1 {
+  text-align: center;
+  padding: 20px;
+  color: #f6f6f6;
+}

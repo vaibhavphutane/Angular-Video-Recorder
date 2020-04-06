@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { UploadService } from 'src/app/upload.service';
+import { Router } from '@angular/router';
 
 declare var MediaRecorder: any;
 
@@ -28,7 +29,8 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
 
   constructor(private dom: DomSanitizer,
               private cd: ChangeDetectorRef,
-              private uploadService: UploadService) { }
+              private uploadService: UploadService,
+              private router: Router ) { }
 
   ngOnInit(): void {
     this.timer = 0;
@@ -95,6 +97,7 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
     };
     this.uploadService.uploadVideo(payload).subscribe(res => {
       console.log(res);
+      this.router.navigate(['/success-message']);
     });
   }
 
