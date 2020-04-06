@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ChangeDetectorRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef, AfterViewInit, ElementRef } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { UploadService } from 'src/app/upload.service';
 import { Router } from '@angular/router';
@@ -15,6 +15,8 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
   hideVideo: boolean;
   @ViewChild('videoElement') videoElement: any;
   @ViewChild('recordedVideoElement') recordedVideoElement: any;
+  @ViewChild('footer') footer: ElementRef;
+
   video: any;
   recordVideo: any;
   recordedStream = [];
@@ -50,6 +52,7 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
       this.hideVideo = false;
       this.mediaRecorder.start();
       this.increment();
+      this.footer.nativeElement.scrollIntoView({behavior: 'smooth'});
     }, 3000);
   }
 

@@ -4,8 +4,12 @@
   padding: 15px;
   text-align: center;
   color: #f6f6f6;
+  position: sticky;
+  top: 0px;
 }
-
+.footer {
+  margin-top: 410px;
+}
 .form-container {
   display: flex;
   padding: 20px;

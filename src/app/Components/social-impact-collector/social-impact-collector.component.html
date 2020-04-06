@@ -26,7 +26,7 @@
       <video #recordedVideoElement  controls></video>
     </div>
   </form>
-  <div class="action-container">
+  <div #actionContainer class="action-container">
     <div  *ngIf="hideVideo" class="form-group">
       <button class="btn btn-danger btn-sm" (click)="startRecording()">
         Start Recording
@@ -38,9 +38,10 @@
     <div *ngIf="!hideRecoredVideo" class="form-group pr-2">
       <button class="btn btn-primary btn-sm" (click)="submit()">Submit</button>
     </div>
-    <div  *ngIf="!hideVideo" [ngClass]="{'count-down': (60 - timer) < 10 }">
+    <div *ngIf="!hideVideo" [ngClass]="{'count-down': (60 - timer) < 10 }">
       Time Remaining: {{60 - timer}}
     </div>
   </div>
   </div>
 </div>
+<div #footer class="footer"></div>
