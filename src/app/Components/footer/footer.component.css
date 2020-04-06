@@ -8,9 +8,6 @@
   bottom: 0;
 }
 
-.disclaimer {
-  /* font-size: 14px; */
-}
 
 .disclaimer-container {
   display: flex;
@@ -18,4 +15,10 @@
   font-size: 14px;
   justify-content: space-between;
   font-style: italic;
+}
+
+@media only screen and (max-width: 600px) {
+  .disclaimer-container {
+    display: block;
+  }
 }

@@ -44,6 +44,7 @@ video {
 .action-container {
   display: flex;
   justify-content: left;
+  margin-bottom: 10px;
 }
 
 .btn {
