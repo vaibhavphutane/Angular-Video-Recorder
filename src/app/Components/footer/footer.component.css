@@ -1,0 +1,21 @@
+.footer {
+  background: #040e1b;
+  text-align: center;
+  color: #f6f6f6;
+  padding: 5px;
+  position: sticky;
+  top: 0;
+  bottom: 0;
+}
+
+.disclaimer {
+  /* font-size: 14px; */
+}
+
+.disclaimer-container {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 14px;
+  justify-content: space-between;
+  font-style: italic;
+}
