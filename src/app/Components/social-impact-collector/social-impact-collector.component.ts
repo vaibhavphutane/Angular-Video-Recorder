@@ -61,7 +61,7 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
 
   startRecording() {
    this.guideLineDialog = this.dialog.open(VideoGuidelineComponent).afterClosed().subscribe(res => {
-      if (res && !this.isIos) {
+      if (res) {
         this.startCamera();
         setTimeout(() => {
           this.hideVideo = false;
@@ -69,8 +69,6 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
           this.increment();
           this.footer.nativeElement.scrollIntoView({behavior: 'smooth'});
         }, 3000);
-      } else if (res && this.isIos) {
-        this.iosFile.nativeElement.click();
       }
     });
   }
