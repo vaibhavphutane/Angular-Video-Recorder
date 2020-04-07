@@ -1,18 +1,15 @@
-import { Component, OnInit, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { Component, OnInit,  AfterViewInit,  Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-declare var MediaRecorder: any;
 @Component({
   selector: 'app-social-impact',
   templateUrl: './social-impact.component.html',
   styleUrls: ['./social-impact.component.css']
 })
-export class SocialImpactComponent implements OnInit, AfterViewInit {
+export class SocialImpactComponent implements OnInit {
 
   constructor() { }
 
   ngOnInit() {
   }
-
-  ngAfterViewInit() { }
 }

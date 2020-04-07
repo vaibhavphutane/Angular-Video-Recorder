@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { SocialImpactComponent } from './Components/social-impact/social-impact.component';
 import { SocialImpactCollectorComponent } from './Components/social-impact-collector/social-impact-collector.component';
+import { SocialImpactComponent } from './Components/social-impact/social-impact.component';
 
 
 const routes: Routes = [
-  {path: '', component: SocialImpactCollectorComponent},
-  {path: 'success-message', component: SocialImpactComponent}
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'home', component: SocialImpactCollectorComponent},
+  { path: 'uploaded-successfully', component: SocialImpactComponent }
 ];
 
 @NgModule({

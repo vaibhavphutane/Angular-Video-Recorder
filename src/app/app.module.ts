@@ -15,7 +15,6 @@ import { VideoGuidelineComponent } from './Components/video-guideline/video-guid
 @NgModule({
   declarations: [
     AppComponent,
-    SocialImpactComponent,
     SocialImpactCollectorComponent,
     FooterComponent,
     HeaderComponent,
@@ -30,6 +29,10 @@ import { VideoGuidelineComponent } from './Components/video-guideline/video-guid
     MatDialogModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    SocialImpactComponent,
+    VideoGuidelineComponent
+  ]
 })
 export class AppModule { }
