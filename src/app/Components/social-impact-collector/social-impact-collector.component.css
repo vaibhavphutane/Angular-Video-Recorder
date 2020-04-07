@@ -73,6 +73,10 @@ video {
   color: red;
 }
 
+img {
+  width: 5px;
+  height: 5px;
+}
 @media only screen and (max-width: 600px) {
   body {
     text-align: center;

@@ -30,6 +30,7 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
   timer: number;
   timerCounter: any;
   clear: boolean;
+  loader: boolean;
 
   constructor(private dom: DomSanitizer,
               private cd: ChangeDetectorRef,
@@ -74,7 +75,13 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
       video: { facingMode: 'user '},
       audio: { echoCancellation: {exact: true} }
     };
-    navigator.getUserMedia(constraint,
+    const nav = <any> navigator;
+    nav.getUserMedia = ( nav.getUserMedia ||
+      nav.webkitGetUserMedia ||
+      nav.mozGetUserMedia ||
+      nav.msGetUserMedia);
+
+    nav.getUserMedia(constraint,
       stream => {
         this.video.srcObject = stream;
         this.video.play();

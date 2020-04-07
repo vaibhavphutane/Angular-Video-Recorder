@@ -33,7 +33,9 @@
       <button id="stopRecordingId" class="btn btn-primary btn-sm" (click)="stopRecording()">Stop Recording</button>
     </div>
     <div *ngIf="!hideRecoredVideo" class="form-group pr-2">
-      <button class="btn btn-primary btn-sm" (click)="submit()">Submit</button>
+      <button class="btn btn-primary btn-sm" (click)="submit()">
+        Submit
+      </button>
     </div>
     <div *ngIf="!hideVideo" [ngClass]="{'count-down': (60 - timer) < 10 }">
       Time Remaining: {{60 - timer}}
