@@ -20,6 +20,7 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
   @ViewChild('videoElement') videoElement: any;
   @ViewChild('recordedVideoElement') recordedVideoElement: any;
   @ViewChild('footer') footer: ElementRef;
+  @ViewChild('file') iosFile: any;
 
   video: any;
   recordVideo: any;
@@ -60,7 +61,7 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
 
   startRecording() {
    this.guideLineDialog = this.dialog.open(VideoGuidelineComponent).afterClosed().subscribe(res => {
-      if (res) {
+      if (res && !this.isIos) {
         this.startCamera();
         setTimeout(() => {
           this.hideVideo = false;
@@ -68,6 +69,8 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
           this.increment();
           this.footer.nativeElement.scrollIntoView({behavior: 'smooth'});
         }, 3000);
+      } else if (res && this.isIos) {
+        this.iosFile.nativeElement.click();
       }
     });
   }
