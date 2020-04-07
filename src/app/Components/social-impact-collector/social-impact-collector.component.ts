@@ -35,6 +35,7 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
   loader: boolean;
   guideLineDialog: Subscription;
   isIos: boolean;
+  iosVideoFile: File;
 
   constructor(private dom: DomSanitizer,
               private cd: ChangeDetectorRef,
@@ -117,7 +118,7 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
     this.guideLineDialog.unsubscribe();
     const payload = {
       email: this.email,
-      videoBlob: this.recordedBlob,
+      videoBlob: this.isIos ? this.iosVideoFile: this.recordedBlob,
       duration: this.timer
     };
     this.uploadService.uploadVideo(payload).subscribe(res => {
@@ -138,6 +139,10 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
         this.increment();
       }
     }, 1000);
+  }
 
+  fileUpload(event) {
+    this.iosVideoFile = event.target.files[0];
+    console.log(event.target.files[0]);
   }
 }

@@ -91,3 +91,19 @@ img {
     height: 205px;
   }
 }
+
+/* Iphone */
+
+.custom-file {
+  cursor: pointer;
+  display: block;
+  background: #dc3545;
+  color: #ffffff;
+  padding: 8px;
+  width: 130px;
+  margin-right: 10px;
+  border-radius: 0.25rem;
+}
+#file {
+  display: none;
+}
