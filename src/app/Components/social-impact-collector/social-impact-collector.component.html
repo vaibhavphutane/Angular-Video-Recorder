@@ -1,6 +1,6 @@
 <div class="form-container">
   <div class="card-container">
-  {{isIos}}  <p>New Year 2020 was celebrated at most places with enthusiasm. As January came to end, all corporates, schools, colleges started getting busy; extremely busy, which was the routine for many years. A tiny  0.125 Micron virus with usual symptoms of seasonal flu changed the complete world since March. First time in world that almost all International and Domestic travels are stopped, almost all cities, towns are home locked. Only one thing most are almost sure, Worst is yet to come.</p>
+  <p>New Year 2020 was celebrated at most places with enthusiasm. As January came to end, all corporates, schools, colleges started getting busy; extremely busy, which was the routine for many years. A tiny  0.125 Micron virus with usual symptoms of seasonal flu changed the complete world since March. First time in world that almost all International and Domestic travels are stopped, almost all cities, towns are home locked. Only one thing most are almost sure, Worst is yet to come.</p>
   <div></div>
   <p>To understand, how our society and near ones are reacting emotionally  to this situation, Nihilent is requesting you to post a 45 to 60 second selfie video of yours expressing your views on</p>
   <p class="questions">
@@ -23,7 +23,8 @@
       <video #recordedVideoElement  controls></video>
     </div>
   </form>
-  <div #actionContainer class="action-container">
+  <div  class="action-container">
+    <input type="file" accept="video/*;capture=camcorder">
     <div  *ngIf="hideVideo" class="form-group">
       <button class="btn btn-danger btn-sm" (click)="startRecording()">
         Start Recording
