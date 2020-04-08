@@ -94,7 +94,7 @@ img {
 
 /* Iphone */
 
-.custom-file {
+/* .custom-file {
   cursor: pointer;
   display: block;
   background: #dc3545;
@@ -106,6 +106,22 @@ img {
 }
 #file {
   /* display: none; */
-  cursor: pointer;
+ /* cursor: pointer;
 
+}
+ */
+ ::-ms-browse {
+  background: #dc3545;
+  color: #f6f6f6;
+  padding: 4px;
+  border-radius: 0.25rem;
+  border: none;
+}
+
+::-webkit-file-upload-button {
+  background: #dc3545;
+  color: #f6f6f6;
+  padding: 4px;
+  border-radius: 0.25rem;
+  border: none;
 }
