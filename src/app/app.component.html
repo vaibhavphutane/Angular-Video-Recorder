@@ -1,3 +1,9 @@
-<!-- <app-social-impact></app-social-impact> -->
-<app-header></app-header>
-<router-outlet></router-outlet>
+<div>
+
+  <app-header></app-header>
+  <router-outlet>
+    <span *ngIf="showLoader" class="loading">
+      <app-my-loader></app-my-loader>
+    </span>
+  </router-outlet>
+</div>

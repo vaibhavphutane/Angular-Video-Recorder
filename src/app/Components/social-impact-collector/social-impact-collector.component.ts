@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { VideoGuidelineComponent } from '../video-guideline/video-guideline.component';
 import { SocialImpactComponent } from '../social-impact/social-impact.component';
 import { Subscription } from 'rxjs';
+import { LoaderService } from 'src/app/loader.service';
 
 declare var MediaRecorder: any;
 
@@ -43,14 +44,15 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
               private uploadService: UploadService,
               private router: Router,
               private dialog: MatDialog,
-              private ngZone: NgZone ) { }
+              private ngZone: NgZone,
+              private loaderService: LoaderService
+              ) { }
 
   ngOnInit(): void {
     this.isIos = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
     this.timer = 0;
     this.hideVideo = true;
     this.hideRecoredVideo = true;
-    console.log(this.isIos);
   }
 
   ngAfterViewInit() {
@@ -60,15 +62,15 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
 
 
   startRecording() {
-   this.guideLineDialog = this.dialog.open(VideoGuidelineComponent).afterClosed().subscribe(res => {
-      if (res) {
-        this.startCamera();
-        setTimeout(() => {
-          this.hideVideo = false;
-          this.mediaRecorder.start();
-          this.increment();
-          this.footer.nativeElement.scrollIntoView({behavior: 'smooth'});
-        }, 3000);
+   this.dialog.open(VideoGuidelineComponent).afterClosed().subscribe(res => {
+    if (res) {
+      this.startCamera();
+      setTimeout(() => {
+        this.hideVideo = false;
+        this.mediaRecorder.start();
+        this.increment();
+        this.footer.nativeElement.scrollIntoView({behavior: 'smooth'});
+      }, 3000);
       }
     });
   }
@@ -116,13 +118,14 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
   }
 
   submit() {
+    this.ngZone.run(() => this.loaderService.display(true));
     const payload = {
       email: this.email,
       videoBlob: this.isIos ? this.iosVideoFile : this.recordedBlob,
       duration: this.isIos ? -1 : this.timer
     };
-
     this.uploadService.uploadVideo(payload, this.isIos).subscribe(res => {
+      this.ngZone.run(() => this.loaderService.display(false));
       this.ngZone.run(() => this.router.navigate(['/uploaded-successfully']));
     });
   }
@@ -145,13 +148,5 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
   fileUpload(event) {
     this.iosVideoFile = event.target.files[0] as File;
     console.log(event.target.files[0]);
-  }
-
-  openFileUploader() {
-    this.dialog.open(VideoGuidelineComponent).afterClosed().subscribe(isGotit => {
-      if (isGotit) {
-        this.iosFile.nativeElement.click();
-      }
-    });
   }
 }

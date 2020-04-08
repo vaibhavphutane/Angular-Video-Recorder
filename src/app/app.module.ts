@@ -12,13 +12,16 @@ import { HeaderComponent } from './Components/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDialogModule} from '@angular/material/dialog';
 import { VideoGuidelineComponent } from './Components/video-guideline/video-guideline.component';
+import { LoaderComponent } from './Components/Loader/my-loader.component';
+import { LoaderService } from './loader.service';
 @NgModule({
   declarations: [
     AppComponent,
     SocialImpactCollectorComponent,
     FooterComponent,
     HeaderComponent,
-    VideoGuidelineComponent
+    VideoGuidelineComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,9 @@ import { VideoGuidelineComponent } from './Components/video-guideline/video-guid
     BrowserAnimationsModule,
     MatDialogModule
   ],
-  providers: [],
+  providers: [
+    LoaderService
+  ],
   bootstrap: [AppComponent],
   entryComponents: [
     SocialImpactComponent,
