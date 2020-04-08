@@ -119,8 +119,8 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
     this.guideLineDialog.unsubscribe();
     const payload = {
       email: this.email,
-      videoBlob: this.isIos ? this.iosVideoFile: this.recordedBlob,
-      duration: this.timer
+      videoBlob: this.isIos ? this.iosVideoFile : this.recordedBlob,
+      duration: this.isIos ? -1 : this.timer
     };
     this.uploadService.uploadVideo(payload).subscribe(res => {
       this.ngZone.run(() => this.router.navigate(['/uploaded-successfully']));
