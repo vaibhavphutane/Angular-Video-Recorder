@@ -116,13 +116,13 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
   }
 
   submit() {
-    this.guideLineDialog.unsubscribe();
     const payload = {
       email: this.email,
       videoBlob: this.isIos ? this.iosVideoFile : this.recordedBlob,
       duration: this.isIos ? -1 : this.timer
     };
-    this.uploadService.uploadVideo(payload).subscribe(res => {
+
+    this.uploadService.uploadVideo(payload, this.isIos).subscribe(res => {
       this.ngZone.run(() => this.router.navigate(['/uploaded-successfully']));
     });
   }
@@ -143,7 +143,15 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
   }
 
   fileUpload(event) {
-    this.iosVideoFile = event.target.files[0];
+    this.iosVideoFile = event.target.files[0] as File;
     console.log(event.target.files[0]);
+  }
+
+  openFileUploader() {
+    this.dialog.open(VideoGuidelineComponent).afterClosed().subscribe(isGotit => {
+      if (isGotit) {
+        this.iosFile.nativeElement.click();
+      }
+    });
   }
 }
