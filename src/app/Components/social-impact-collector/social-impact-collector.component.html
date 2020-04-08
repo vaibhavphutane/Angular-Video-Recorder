@@ -23,7 +23,7 @@
       <video #recordedVideoElement  controls></video>
     </div>
   </form>
-  <div  class="action-container">
+  <div *ngIf="isIos" class="action-container">
     <input id="file" #file name="file" type="file" (change)="fileUpload($event)" accept="video/*">
     <!-- <label *ngIf="isIosError" for=""></label> -->
     <button *ngIf="!iosVideoFile" class="btn btn-danger btn-sm" (click)="openFileUploader()">Start Recording</button>
