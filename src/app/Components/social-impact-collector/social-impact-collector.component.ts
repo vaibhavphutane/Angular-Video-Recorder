@@ -54,7 +54,7 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.isIos = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
     this.timer = 0;
-    this.recordingCountDown = 10;
+    this.recordingCountDown = 6;
     this.hideVideo = true;
     this.hideRecoredVideo = true;
   }
@@ -77,7 +77,7 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
           this.showCountDown = false;
           this.mediaRecorder.start();
           this.increment();
-        }, 10000);
+        }, 5000);
       }
     });
   }
