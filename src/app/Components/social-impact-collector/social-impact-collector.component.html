@@ -1,8 +1,8 @@
 <div class="form-container">
   <div class="card-container">
-  <p>New Year 2020 was celebrated at most places with enthusiasm. As January came to end, all corporates, schools, colleges started getting busy; extremely busy, which was the routine for many years. A tiny  0.125 Micron virus with usual symptoms of seasonal flu changed the complete world since March. First time in world that almost all International and Domestic travels are stopped, almost all cities, towns are home locked. Only one thing most are almost sure, Worst is yet to come.</p>
+  <p>New Year 2020 was celebrated at most places with enthusiasm. As January came to end, all corporates, schools, colleges started getting busy; extremely busy, which was the routine for many years. A tiny 0.125 Micron virus with usual symptoms of seasonal flu changed the complete world since March. The first time in the world that almost all International and Domestic travels are stopped, almost all cities, towns are home locked. Only one thing most are almost sure, Worst is yet to come.</p>
   <div></div>
-  <p>To understand, how our society and near ones are reacting emotionally  to this situation, Nihilent is requesting you to post a 45 to 60 second selfie video of yours expressing your views on</p>
+  <p>To understand, how our society and near ones are reacting emotionally to this situation, Nihilent is requesting you to post a 45 to 60 seconds selfie video of yours expressing your views on</p>
   <p class="questions">
    Share your views on any of following <br>
   <span>1. Have this outbreak changed you as a person? how ?</span><br>
@@ -16,6 +16,9 @@
       <label  for="email">If you like to receive our report please provide your email</label>
       <input name="email" [(ngModel)]="email" id="email" class="form-control" type="email">
     </div>
+    <div *ngIf="showCountDown"  class="count-down-timer">
+      {{recordingCountDown}}
+    </div>
     <div [hidden]="hideVideo" class="form-group">
       <video id="recordingVideo" #videoElement controls  [muted]="'muted'"></video>
     </div>
@@ -23,17 +26,21 @@
       <video #recordedVideoElement  controls></video>
     </div>
   </form>
+
+  <!--IOS-->
   <div *ngIf="isIos" class="action-container">
     <input *ngIf="!iosVideoFile" id="file" #file name="file" type="file" (change)="fileUpload($event)" accept="video/*">
-    <!-- <button *ngIf="!iosVideoFile" class="btn btn-danger btn-sm" (click)="openFileUploader()">Start Recording</button> -->
     <div *ngIf="iosVideoFile" class="form-group pr-2">
       <button class="btn btn-primary" (click)="submit()">
         Upload
       </button>
     </div>
   </div>
+
+  <!--Web and Android-->
+
   <div *ngIf="!isIos" class="action-container">
-    <div  *ngIf="hideVideo" class="form-group">
+    <div  *ngIf="hideVideo && hideRecoredVideo" class="form-group">
       <button class="btn btn-danger btn-sm" (click)="startRecording()">
         Start Recording
       </button>

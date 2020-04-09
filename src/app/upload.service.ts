@@ -18,6 +18,9 @@ export class UploadService {
       fd.append('video', payload.videoBlob, 'video.mp4');
       fd.append('duration', String(payload.duration - 1));
     }
-    return this.http.post('http://localhost:80/FileUpload/FUpload.svc/Upload/', fd);
+    return this.http.post('http://localhost:80/FileUpload/FUpload.svc/Upload/', fd, {
+      reportProgress: true,
+      observe: 'events'
+    });
   }
 }

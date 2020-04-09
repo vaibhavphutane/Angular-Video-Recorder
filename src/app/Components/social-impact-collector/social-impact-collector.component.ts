@@ -7,6 +7,7 @@ import { VideoGuidelineComponent } from '../video-guideline/video-guideline.comp
 import { SocialImpactComponent } from '../social-impact/social-impact.component';
 import { Subscription } from 'rxjs';
 import { LoaderService } from 'src/app/loader.service';
+import { HttpEventType, HttpResponse } from '@angular/common/http';
 
 declare var MediaRecorder: any;
 
@@ -38,6 +39,8 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
   guideLineDialog: Subscription;
   isIos: boolean;
   iosVideoFile: File;
+  recordingCountDown: number;
+  showCountDown: boolean;
 
   constructor(private dom: DomSanitizer,
               private cd: ChangeDetectorRef,
@@ -46,11 +49,12 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
               private dialog: MatDialog,
               private ngZone: NgZone,
               private loaderService: LoaderService
-              ) { }
+  ) { }
 
   ngOnInit(): void {
     this.isIos = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
     this.timer = 0;
+    this.recordingCountDown = 10;
     this.hideVideo = true;
     this.hideRecoredVideo = true;
   }
@@ -62,15 +66,18 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
 
 
   startRecording() {
-   this.dialog.open(VideoGuidelineComponent).afterClosed().subscribe(res => {
-    if (res) {
-      this.startCamera();
-      setTimeout(() => {
-        this.hideVideo = false;
-        this.mediaRecorder.start();
-        this.increment();
-        this.footer.nativeElement.scrollIntoView({behavior: 'smooth'});
-      }, 3000);
+    this.dialog.open(VideoGuidelineComponent).afterClosed().subscribe(res => {
+      this.showCountDown = true;
+      this.footer.nativeElement.scrollIntoView({ behavior: 'smooth' });
+      this.decrement();
+      if (res) {
+        this.startCamera();
+        setTimeout(() => {
+          this.hideVideo = false;
+          this.showCountDown = false;
+          this.mediaRecorder.start();
+          this.increment();
+        }, 10000);
       }
     });
   }
@@ -82,12 +89,12 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
   }
 
   startCamera() {
-    const constraint =   {
-      video: { facingMode: 'user '},
-      audio: { echoCancellation: {exact: true} }
+    const constraint = {
+      video: { facingMode: 'user ' },
+      audio: { echoCancellation: { exact: true } }
     };
-    const nav = <any> navigator;
-    nav.getUserMedia = ( nav.getUserMedia ||
+    const nav = <any>navigator;
+    nav.getUserMedia = (nav.getUserMedia ||
       nav.webkitGetUserMedia ||
       nav.mozGetUserMedia ||
       nav.msGetUserMedia);
@@ -124,9 +131,13 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
       videoBlob: this.isIos ? this.iosVideoFile : this.recordedBlob,
       duration: this.isIos ? -1 : this.timer
     };
-    this.uploadService.uploadVideo(payload, this.isIos).subscribe(res => {
-      this.ngZone.run(() => this.loaderService.display(false));
-      this.ngZone.run(() => this.router.navigate(['/uploaded-successfully']));
+    this.uploadService.uploadVideo(payload, this.isIos).subscribe(event => {
+      if (event.type === HttpEventType.UploadProgress) {
+        console.log('upload progress', event.loaded / event.total + '%');
+      } else if (event.type === HttpEventType.Response) {
+        this.ngZone.run(() => this.loaderService.display(false));
+        this.ngZone.run(() => this.router.navigate(['/uploaded-successfully']));
+      }
     });
   }
 
@@ -141,6 +152,17 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
         clearTimeout(this.timerCounter);
       } else {
         this.increment();
+      }
+    }, 1000);
+  }
+
+  decrement() {
+    this.recordingCountDown--;
+    const timer = setTimeout(() => {
+      if (this.recordingCountDown === 0) {
+        clearTimeout(timer);
+      } else {
+        this.decrement();
       }
     }, 1000);
   }

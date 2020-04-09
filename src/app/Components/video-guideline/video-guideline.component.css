@@ -14,6 +14,11 @@
 .btn {
   margin: 10px;
 }
+.btn:focus {
+  box-shadow: none;
+}
+
+
 
 /deep/ .mat-dialog-container {
   border-radius: 0px;

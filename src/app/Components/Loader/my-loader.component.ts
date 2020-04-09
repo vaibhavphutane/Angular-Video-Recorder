@@ -19,7 +19,7 @@ export class LoaderComponent implements OnInit, AfterViewInit {
       if (message) {
         this.msg = message;
       } else {
-        this.msg = 'Uploading ! Please wait';
+        this.msg = 'Uploading! Please wait';
       }
       });
   }

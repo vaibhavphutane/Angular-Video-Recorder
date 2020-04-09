@@ -73,6 +73,11 @@ video {
   color: red;
 }
 
+.count-down-timer {
+    text-align: center;
+    font-size: 200px;
+}
+
 img {
   width: 5px;
   height: 5px;
@@ -90,6 +95,10 @@ img {
   video {
     height: 205px;
   }
+  .count-down-timer {
+    text-align: center;
+    font-size: 100px;
+}
 }
 
 /* Iphone */
