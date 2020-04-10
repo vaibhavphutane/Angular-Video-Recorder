@@ -14,6 +14,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { VideoGuidelineComponent } from './Components/video-guideline/video-guideline.component';
 import { LoaderComponent } from './Components/Loader/my-loader.component';
 import { LoaderService } from './loader.service';
+import { ErrorMessageComponent } from './Components/error-message/error-message.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +22,8 @@ import { LoaderService } from './loader.service';
     FooterComponent,
     HeaderComponent,
     VideoGuidelineComponent,
-    LoaderComponent
+    LoaderComponent,
+    ErrorMessageComponent
   ],
   imports: [
     BrowserModule,

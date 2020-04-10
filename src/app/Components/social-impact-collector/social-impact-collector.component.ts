@@ -138,6 +138,10 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
         this.ngZone.run(() => this.loaderService.display(false));
         this.ngZone.run(() => this.router.navigate(['/uploaded-successfully']));
       }
+    },
+    err => {
+      this.ngZone.run(() => this.loaderService.display(false));
+      this.ngZone.run(() => this.router.navigate(['/error']));
     });
   }
 
