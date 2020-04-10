@@ -11,7 +11,7 @@
   <span>4. How soon do you think we get back to normal life? </span><br>
  </p>
  <p></p>
-  <form>
+  <form name="impactForm" netlify>
     <div class="form-group">
       <label  for="email">If you like to receive our report please provide your email</label>
       <input name="email" [(ngModel)]="email" id="email" class="form-control" type="email">
@@ -25,6 +25,26 @@
     <div [hidden]="hideRecoredVideo" class="form-group">
       <video #recordedVideoElement  controls></video>
     </div>
+    <!--Web and Android-->
+
+  <div *ngIf="!isIos" class="action-container">
+    <div  *ngIf="hideVideo && hideRecoredVideo" class="form-group">
+      <button class="btn btn-danger btn-sm" (click)="startRecording()">
+        Start Recording
+      </button>
+    </div>
+    <div *ngIf="!hideVideo" class="form-group pr-2">
+      <button id="stopRecordingId" class="btn btn-primary btn-sm" (click)="stopRecording()">Stop Recording</button>
+    </div>
+    <div *ngIf="!hideRecoredVideo" class="form-group pr-2">
+      <button type="submit" class="btn btn-primary btn-sm" (click)="submit()">
+        Submit
+      </button>
+    </div>
+    <div *ngIf="!hideVideo" [ngClass]="{'count-down': (60 - timer) < 10 }">
+      Time Remaining: {{60 - timer}}
+    </div>
+  </div>
   </form>
 
   <!--IOS-->
@@ -37,26 +57,8 @@
     </div>
   </div>
 
-  <!--Web and Android-->
 
-  <div *ngIf="!isIos" class="action-container">
-    <div  *ngIf="hideVideo && hideRecoredVideo" class="form-group">
-      <button class="btn btn-danger btn-sm" (click)="startRecording()">
-        Start Recording
-      </button>
-    </div>
-    <div *ngIf="!hideVideo" class="form-group pr-2">
-      <button id="stopRecordingId" class="btn btn-primary btn-sm" (click)="stopRecording()">Stop Recording</button>
-    </div>
-    <div *ngIf="!hideRecoredVideo" class="form-group pr-2">
-      <button class="btn btn-primary btn-sm" (click)="submit()">
-        Submit
-      </button>
-    </div>
-    <div *ngIf="!hideVideo" [ngClass]="{'count-down': (60 - timer) < 10 }">
-      Time Remaining: {{60 - timer}}
-    </div>
-  </div>
+
   </div>
 </div>
 <div #footer class="footer-1"></div>
