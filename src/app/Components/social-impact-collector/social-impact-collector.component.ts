@@ -67,10 +67,10 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
 
   startRecording() {
     this.dialog.open(VideoGuidelineComponent).afterClosed().subscribe(res => {
-      this.showCountDown = true;
-      this.footer.nativeElement.scrollIntoView({ behavior: 'smooth' });
-      this.decrement();
       if (res) {
+        this.showCountDown = true;
+        this.footer.nativeElement.scrollIntoView({ behavior: 'smooth' });
+        this.decrement();
         this.startCamera();
         setTimeout(() => {
           this.hideVideo = false;
