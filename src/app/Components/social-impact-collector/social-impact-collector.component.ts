@@ -162,7 +162,7 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
   increment() {
     this.timerCounter = setTimeout(() => {
       this.timer++;
-      if (this.timer === 60) {
+      if (this.timer === 45) {
         this.stopRecording();
       }
       if (this.clear) {
