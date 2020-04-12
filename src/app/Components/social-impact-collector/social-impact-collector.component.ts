@@ -8,6 +8,7 @@ import { SocialImpactComponent } from '../social-impact/social-impact.component'
 import { Subscription } from 'rxjs';
 import { LoaderService } from 'src/app/loader.service';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
+import { FooterComponent } from '../footer/footer.component';
 
 declare var MediaRecorder: any;
 
@@ -18,7 +19,7 @@ declare var MediaRecorder: any;
 })
 export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
 
-  hideVideo: boolean;
+
   @ViewChild('videoElement') videoElement: any;
   @ViewChild('recordedVideoElement') recordedVideoElement: any;
   @ViewChild('footer') footer: ElementRef;
@@ -29,18 +30,26 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
   recordedStream = [];
   mediaRecorder: any;
   recordedBlob: Blob;
-  hideRecoredVideo: boolean;
   phone: string;
   email: string;
   timer: number;
   timerCounter: any;
-  clear: boolean;
-  loader: boolean;
   guideLineDialog: Subscription;
-  isIos: boolean;
   iosVideoFile: File;
   recordingCountDown: number;
+
+  isIos: boolean;
+
   showCountDown: boolean;
+  isCameraStarted: boolean;
+  hideVideo: boolean;
+
+  isRecordingStarted: boolean;
+  hideRecoredVideo: boolean;
+
+  clear: boolean;
+  loader: boolean;
+
 
   constructor(private dom: DomSanitizer,
               private cd: ChangeDetectorRef,
@@ -54,6 +63,7 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.isIos = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
     this.timer = 0;
+    this.isCameraStarted = false;
     this.recordingCountDown = 6;
     this.hideVideo = true;
     this.hideRecoredVideo = true;
@@ -64,16 +74,13 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
     this.recordVideo = this.recordedVideoElement.nativeElement;
   }
 
-
   startRecording() {
     this.dialog.open(VideoGuidelineComponent).afterClosed().subscribe(res => {
       if (res) {
         this.showCountDown = true;
-        this.footer.nativeElement.scrollIntoView({ behavior: 'smooth' });
+        this.isRecordingStarted = true;
         this.decrement();
-        this.startCamera();
         setTimeout(() => {
-          this.hideVideo = false;
           this.showCountDown = false;
           this.mediaRecorder.start();
           this.increment();
@@ -89,6 +96,12 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
   }
 
   startCamera() {
+    this.isCameraStarted = true;
+    this.hideVideo = false;
+    setTimeout(() => {
+      this.footer.nativeElement.scrollIntoView({ behavior: 'smooth'});
+    }, 1000);
+
     const constraint = {
       video: { facingMode: 'user ' },
       audio: { echoCancellation: { exact: true } }
@@ -112,6 +125,7 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
           this.recordVideo.src = videoURL;
           this.hideRecoredVideo = false;
           this.recordVideo.play();
+          stream.getTracks().forEach(track => track.stop());
           this.cd.detectChanges();
         };
         this.mediaRecorder.ondataavailable = e => {

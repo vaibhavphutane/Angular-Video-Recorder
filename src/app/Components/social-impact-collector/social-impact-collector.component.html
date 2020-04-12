@@ -1,52 +1,64 @@
 <div class="form-container">
   <div class="card-container">
-  <p>New Year 2020 was celebrated at most places with enthusiasm. As January came to end, all corporates, schools, colleges started getting busy; extremely busy, which was the routine for many years. A tiny 0.125 Micron virus with usual symptoms of seasonal flu changed the complete world since March. The first time in the world that almost all International and Domestic travels are stopped, almost all cities, towns are home locked. Only one thing most are almost sure, Worst is yet to come.</p>
-  <div></div>
-  <p>To understand, how our society and near ones are reacting emotionally to this situation, Nihilent is requesting you to post a 45 to 60 seconds selfie video of yours expressing your views on</p>
-  <p class="questions">
-   Share your views on any of following <br>
-  <span>1. Have this outbreak changed you as a person? how ?</span><br>
-  <span>2. What is your worst fear from this outbreak? </span><br>
-  <span>3. Do you think this will impact kids education?</span>
-  <span>4. How soon do you think we get back to normal life? </span><br>
- </p>
- <p></p>
-  <form name="impactForm" netlify>
-    <div class="form-group">
-      <label  for="email">If you like to receive our report please provide your email</label>
-      <input name="email" [(ngModel)]="email" id="email" class="form-control" type="email">
-    </div>
-    <div *ngIf="showCountDown"  class="count-down-timer">
-      {{recordingCountDown}}
-    </div>
-    <div [hidden]="hideVideo" class="form-group">
-      <video id="recordingVideo" #videoElement controls  [muted]="'muted'"></video>
-    </div>
-    <div [hidden]="hideRecoredVideo" class="form-group">
-      <video #recordedVideoElement  controls></video>
-    </div>
-    <!--Web and Android-->
+    <div class="main-container">
+      <div class="para-container">
+        <p>New Year 2020 was celebrated at most places with enthusiasm. As January came to end, all corporates, schools, colleges started getting busy; extremely busy, which was the routine for many years. A tiny 0.125 Micron virus with usual symptoms of seasonal flu changed the complete world since March. The first time in the world that almost all International and Domestic travels are stopped, almost all cities, towns are home locked. Only one thing most are almost sure, Worst is yet to come.</p>
+        <div></div>
+        <p>To understand, how our society and near ones are reacting emotionally to this situation, Nihilent is requesting you to post a 45 to 60 seconds selfie video of yours expressing your views on</p>
+        <p class="questions">
+        <span>Share your views on any of following</span> <br>
+        <span>1. Have this outbreak changed you as a person? how ?</span><br>
+        <span>2. What is your worst fear from this outbreak? </span><br>
+        <span>3. Do you think this will impact kids education?</span><br>
+        <span>4. How soon do you think we get back to normal life? </span><br>
+       </p>
+       <p></p>
+      </div>
+      <div class="video-form-container">
+        <form>
+          <div class="form-group">
+            <label  for="email">If you like to receive our report please provide your email (optional)</label>
+            <input name="email" [(ngModel)]="email" id="email" class="form-control" type="email">
+          </div>
+          <div *ngIf="showCountDown"  class="count-down-timer">
+            <p>{{recordingCountDown}}</p>
+          </div>
+          <div [hidden]="hideVideo || showCountDown" class="form-group">
+            <video id="recordingVideo" #videoElement controls  [muted]="'muted'"></video>
+          </div>
+          <div [hidden]="hideRecoredVideo" class="form-group">
+            <video #recordedVideoElement  controls></video>
+          </div>
+          <!--Web and Android-->
 
-  <div *ngIf="!isIos" class="action-container">
-    <div  *ngIf="hideVideo && hideRecoredVideo" class="form-group">
-      <button class="btn btn-danger btn-sm" (click)="startRecording()">
-        Start Recording
-      </button>
+        <div *ngIf="!isIos" class="action-container">
+          <div *ngIf="!isCameraStarted" class="form-group">
+            <button class="btn btn-danger btn-sm" (click)="startCamera()">
+              Start Camera
+            </button>
+          </div>
+          <div #footer *ngIf="isCameraStarted && !isRecordingStarted" class="form-group">
+            <button class="btn btn-danger btn-sm" (click)="startRecording()">
+              Start Recording
+            </button>
+          </div>
+          <div *ngIf="hideRecoredVideo && isRecordingStarted" class="form-group pr-2">
+            <button id="stopRecordingId" class="btn btn-primary btn-sm" (click)="stopRecording()">
+              Stop Recording
+            </button>
+          </div>
+          <div *ngIf="!hideRecoredVideo" class="form-group pr-2">
+            <button type="submit" class="btn btn-primary btn-sm" (click)="submit()">
+              Submit
+            </button>
+          </div>
+          <div *ngIf="!hideVideo" [ngClass]="{'count-down': (60 - timer) < 10 }">
+            Time Remaining: {{60 - timer}}
+          </div>
+        </div>
+        </form>
+      </div>
     </div>
-    <div *ngIf="!hideVideo" class="form-group pr-2">
-      <button id="stopRecordingId" class="btn btn-primary btn-sm" (click)="stopRecording()">Stop Recording</button>
-    </div>
-    <div *ngIf="!hideRecoredVideo" class="form-group pr-2">
-      <button type="submit" class="btn btn-primary btn-sm" (click)="submit()">
-        Submit
-      </button>
-    </div>
-    <div *ngIf="!hideVideo" [ngClass]="{'count-down': (60 - timer) < 10 }">
-      Time Remaining: {{60 - timer}}
-    </div>
-  </div>
-  </form>
-
   <!--IOS-->
   <div *ngIf="isIos" class="action-container">
     <input *ngIf="!iosVideoFile" id="file" #file name="file" type="file" (change)="fileUpload($event)" accept="video/*">
@@ -56,10 +68,6 @@
       </button>
     </div>
   </div>
-
-
-
   </div>
 </div>
-<div #footer class="footer-1"></div>
 <app-footer></app-footer>

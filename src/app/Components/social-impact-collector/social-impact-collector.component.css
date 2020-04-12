@@ -2,33 +2,34 @@
 .footer-1 {
   margin-top: 410px;
 }
+
 .form-container {
   display: flex;
   padding: 20px;
   border: none;
-  color: #f6f6f6;
+  font-size: 16px;
   justify-content: center;
+  text-align: justify;
 }
 
 .card-container {
-  width: 50%;
+  width: 70%;
   justify-content: center;
 }
-
 p {
-  line-height: 21px;
+  line-height: 1.7em;
 }
-
-
-span {
+.questions {
+  padding-top: 5px;
+  font-weight: 500;
+}
+.questions span {
   display: inline-block;
-  padding-top: 10px;
-  cursor: pointer;
+  padding-top: 8px;
 }
 
 label {
   display: block;
-  padding-bottom: 10px;
 }
 
 .form-control {
@@ -37,7 +38,7 @@ label {
 
 
 video {
-  width: 100%;
+  width: 80%;
   height: 410px;
 }
 
@@ -52,7 +53,7 @@ video {
 }
 
 .btn-primary {
-   background: #65c9f9;
+  background: #65c9f9;
   border: none;
 }
 
@@ -65,9 +66,6 @@ video {
 }
 
 
-.questions {
-  margin-top: 10px;
-}
 
 .count-down {
   color: red;

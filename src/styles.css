@@ -1,10 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~bootstrap/dist/css/bootstrap.css';
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: Lato,sans-serif;
   padding: 0px;
   margin: 0px;
-  background: #111;
+  background: #f7f8fc;
+  font-weight: 400;
+  line-height: 1.7rem;
 }
 
 * {
