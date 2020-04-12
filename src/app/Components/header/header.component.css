@@ -1,9 +1,10 @@
 .title {
   background: #212121;
-  background: url('../../../assets/covid19_new_image.png');
+  background: url('../../../assets/5e6f8ee1c48540116e247a42.jfif') no-repeat center center/cover;
+  opacity: .98;
   padding: 15px;
   text-align: center;
-  color: #f6f6f6;
+  color: black;
   position: sticky;
   top: 0px;
 }

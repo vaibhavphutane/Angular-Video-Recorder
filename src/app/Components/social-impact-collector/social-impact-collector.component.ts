@@ -101,7 +101,6 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
     setTimeout(() => {
       this.footer.nativeElement.scrollIntoView({ behavior: 'smooth'});
     }, 1000);
-
     const constraint = {
       video: { facingMode: 'user ' },
       audio: { echoCancellation: { exact: true } }
