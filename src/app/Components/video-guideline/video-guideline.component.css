@@ -1,5 +1,6 @@
 .dialog-container {
-  font-size: 16px;
+  font-size: 14px;
+  line-height: 1.5rem;
 }
 
 .guideline {
@@ -9,7 +10,7 @@
 .action-container {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 10px;
+  margin-top: 5px;
 }
 .btn {
   margin: 10px;
@@ -22,8 +23,7 @@
 
 /deep/ .mat-dialog-container {
   border-radius: 0px;
-  /* background: #111; */
-  /* color: #f6f6f6; */
+  padding: 20px;
 }
 
 h5 {
