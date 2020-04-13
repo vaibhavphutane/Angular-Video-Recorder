@@ -25,6 +25,9 @@
             <p>{{recordingCountDown}}</p>
           </div>
           <div [hidden]="hideVideo || showCountDown" class="form-group">
+            <div class="question-carousel">
+              {{currentQuestion}}
+            </div>
             <video id="recordingVideo" #videoElement controls  [muted]="'muted'"></video>
           </div>
           <div [hidden]="hideRecoredVideo" class="form-group">
@@ -54,7 +57,7 @@
             </button>
           </div>
           <div *ngIf="!hideVideo && !showCountDown" [ngClass]="{'count-down': (60 - timer) < 10 }">
-            Time Remaining: {{45 - timer}}
+            Time Remaining: {{30 - timer}}
           </div>
         </div>
         </form>

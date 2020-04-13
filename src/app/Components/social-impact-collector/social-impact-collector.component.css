@@ -132,3 +132,10 @@ img {
   border-radius: 0.25rem;
   border: none;
 }
+
+.question-carousel {
+  height: 100px;
+  text-align: center;
+  font-size: 1.7rem;
+  font-weight: 500;
+}

@@ -39,16 +39,17 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
   recordingCountDown: number;
 
   isIos: boolean;
-
   showCountDown: boolean;
   isCameraStarted: boolean;
   hideVideo: boolean;
-
   isRecordingStarted: boolean;
   hideRecoredVideo: boolean;
-
   clear: boolean;
   loader: boolean;
+  questions: string[];
+  currentQuestion: string;
+  slideIndex: number;
+  questionCarouselTimer: any;
 
 
   constructor(private dom: DomSanitizer,
@@ -64,9 +65,16 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
     this.isIos = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
     this.timer = 0;
     this.isCameraStarted = false;
-    this.recordingCountDown = 6;
+    this.recordingCountDown = 4;
     this.hideVideo = true;
     this.hideRecoredVideo = true;
+    this.questions = [
+      '1. Has this outbreak changed you as a person? If yes, how?',
+      '2. What is the worst fear you have from this outbreak?',
+      '3. Do you think this will impact kids education?',
+      '4. How soon do you think we would get back to normal life?'
+    ];
+    this.slideIndex = 0;
   }
 
   ngAfterViewInit() {
@@ -84,6 +92,7 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
           this.showCountDown = false;
           this.mediaRecorder.start();
           this.increment();
+          this.questionCarousel();
         }, 5000);
       }
     });
@@ -93,6 +102,7 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
     this.clear = true;
     this.hideVideo = true;
     this.mediaRecorder.stop();
+    clearTimeout(this.questionCarouselTimer);
   }
 
   startCamera() {
@@ -162,7 +172,7 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
   increment() {
     this.timerCounter = setTimeout(() => {
       this.timer++;
-      if (this.timer === 45) {
+      if (this.timer === 30) {
         this.stopRecording();
       }
       if (this.clear) {
@@ -187,5 +197,16 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
   fileUpload(event) {
     this.iosVideoFile = event.target.files[0] as File;
     console.log(event.target.files[0]);
+  }
+
+  questionCarousel() {
+    this.currentQuestion = this.questions[this.slideIndex];
+    this.slideIndex++;
+    if (this.slideIndex === this.questions.length) {
+    this.slideIndex = 0;
+    }
+    this.questionCarouselTimer = setTimeout(() => {
+      this.questionCarousel();
+    }, 2000);
   }
 }
