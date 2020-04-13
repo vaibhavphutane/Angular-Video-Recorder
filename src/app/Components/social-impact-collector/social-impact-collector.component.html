@@ -4,13 +4,13 @@
       <div class="para-container">
         <p>New year 2020 was celebrated at most places with enthusiasm. As January came to an end, all the corporates, schools and colleges started getting extremely busy which was the routine for years in a row. But, a tiny 0.125-micron virus with usual symptoms of seasonal flu changed the whole world since March. For the first time in history, all the international and domestic travels stopped and almost all cities, towns went under lockdown. Only one thing most are almost sure, worst is yet to come.</p>
         <div></div>
-        <p>To understand how our society and loved ones are reacting emotionally to this situation, Nihilent is requesting you to post a 30 to 45 seconds selfie video for our analysis</p>
+        <p>To understand how our society and loved ones are reacting emotionally to this situation, Nihilent is requesting you to post a 30 to 45 seconds selfie video for our analysis.</p>
         <p class="questions">
-        <span>Share your views on any of following</span> <br>
+        <span>Share your views on any of following:</span> <br>
         <span>1. Has this outbreak changed you as a person? If yes, how?</span><br>
         <span>2. What is the worst fear you have from this outbreak? </span><br>
         <span>3. Do you think this will impact kids education?</span><br>
-        <span>4. Do you think this will impact kids’ education?</span><br>
+        <span>4. How soon do you think we would get back to normal life?</span><br>
        </p>
        <p></p>
       </div>
@@ -18,7 +18,8 @@
         <form>
           <div class="form-group">
             <label  for="email">If you like to receive our report please provide your email (optional)</label>
-            <input name="email" [(ngModel)]="email" id="email" class="form-control" type="email">
+            <input name="email" #emailId="ngModel" [(ngModel)]="email" id="email" class="form-control" type="text" email>
+            <span *ngIf="emailId.touched && emailId.invalid" class="text-danger">Please enter valid email</span>
           </div>
           <div *ngIf="showCountDown"  class="count-down-timer">
             <p>{{recordingCountDown}}</p>
@@ -42,7 +43,7 @@
               Start Recording
             </button>
           </div>
-          <div *ngIf="hideRecoredVideo && isRecordingStarted" class="form-group pr-2">
+          <div *ngIf="hideRecoredVideo && isRecordingStarted && !showCountDown" class="form-group pr-2">
             <button id="stopRecordingId" class="btn btn-primary btn-sm" (click)="stopRecording()">
               Stop Recording
             </button>
@@ -52,7 +53,7 @@
               Submit
             </button>
           </div>
-          <div *ngIf="!hideVideo" [ngClass]="{'count-down': (60 - timer) < 10 }">
+          <div *ngIf="!hideVideo && !showCountDown" [ngClass]="{'count-down': (60 - timer) < 10 }">
             Time Remaining: {{45 - timer}}
           </div>
         </div>
