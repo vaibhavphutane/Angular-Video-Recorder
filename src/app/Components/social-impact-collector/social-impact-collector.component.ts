@@ -64,7 +64,7 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
     this.isIos = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
     this.timer = 0;
     this.isCameraStarted = false;
-    this.recordingCountDown = 6;
+    this.recordingCountDown = 4;
     this.hideVideo = true;
     this.hideRecoredVideo = true;
   }
@@ -84,7 +84,7 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
           this.showCountDown = false;
           this.mediaRecorder.start();
           this.increment();
-        }, 5000);
+        }, 3000);
       }
     });
   }
@@ -162,7 +162,7 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
   increment() {
     this.timerCounter = setTimeout(() => {
       this.timer++;
-      if (this.timer === 45) {
+      if (this.timer === 30) {
         this.stopRecording();
       }
       if (this.clear) {
