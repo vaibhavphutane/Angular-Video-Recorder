@@ -92,7 +92,7 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
           this.mediaRecorder.start();
           this.increment();
           this.questionCarousel();
-        }, 5000);
+        }, 3000);
       }
     });
   }
