@@ -25,6 +25,9 @@
             <p>{{recordingCountDown}}</p>
           </div>
           <div [hidden]="hideVideo || showCountDown" class="form-group">
+            <div class="question-carousel">
+              {{currentQuestion}}
+            </div>
             <video id="recordingVideo" #videoElement controls  [muted]="'muted'"></video>
           </div>
           <div [hidden]="hideRecoredVideo" class="form-group">

@@ -100,23 +100,6 @@ img {
 }
 
 /* Iphone */
-
-/* .custom-file {
-  cursor: pointer;
-  display: block;
-  background: #dc3545;
-  color: #ffffff;
-  padding: 8px;
-  width: 130px;
-  margin-right: 10px;
-  border-radius: 0.25rem;
-}
-#file {
-  /* display: none; */
- /* cursor: pointer;
-
-}
- */
  ::-ms-browse {
   background: #dc3545;
   color: #f6f6f6;
@@ -131,4 +114,12 @@ img {
   padding: 4px;
   border-radius: 0.25rem;
   border: none;
+}
+
+.question-carousel {
+  font-size: 1.4rem;
+  font-weight: 500;
+  width: 80%;
+  padding: 20px;
+  border: 1px solid #c8c8c8;
 }
