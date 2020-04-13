@@ -69,12 +69,11 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
     this.hideVideo = true;
     this.hideRecoredVideo = true;
     this.questions = [
-      '1. Has this outbreak changed you as a person? If yes, how?',
-      '2. What is the worst fear you have from this outbreak?',
-      '3. Do you think this will impact kids education?',
-      '4. How soon do you think we would get back to normal life?'
+      'What is the worst fear you have from this outbreak?',
+      'How soon do you think we would get back to normal life?'
     ];
     this.slideIndex = 0;
+    this.currentQuestion = 'Please adjust your camera and start recording';
   }
 
   ngAfterViewInit() {
@@ -207,6 +206,6 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
     }
     this.questionCarouselTimer = setTimeout(() => {
       this.questionCarousel();
-    }, 2000);
+    }, 15000);
   }
 }
