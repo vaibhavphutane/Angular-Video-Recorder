@@ -111,7 +111,7 @@ export class SocialImpactCollectorComponent implements OnInit, AfterViewInit {
       this.footer.nativeElement.scrollIntoView({ behavior: 'smooth'});
     }, 1000);
     const constraint = {
-      video: { facingMode: 'user ' },
+      video: { facingMode: 'user' },
       audio: { echoCancellation: { exact: true } }
     };
     const nav = <any>navigator;
