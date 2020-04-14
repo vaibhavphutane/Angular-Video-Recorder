@@ -14,7 +14,7 @@
        </p>
        <p></p>
       </div>
-      <div class="video-form-container">
+      <div #footer class="video-form-container">
         <form>
           <div class="form-group">
             <label  for="email">If you like to receive our report please provide your email (optional)</label>
@@ -24,7 +24,7 @@
           <div *ngIf="showCountDown"  class="count-down-timer">
             <p>{{recordingCountDown}}</p>
           </div>
-          <div [hidden]="hideVideo || showCountDown" class="form-group">
+          <div  [hidden]="hideVideo || showCountDown" class="form-group">
             <div class="question-carousel">
               {{currentQuestion}}
             </div>
@@ -41,7 +41,7 @@
               Start Camera
             </button>
           </div>
-          <div #footer *ngIf="isCameraStarted && !isRecordingStarted" class="form-group">
+          <div  *ngIf="isCameraStarted && !isRecordingStarted" class="form-group">
             <button class="btn btn-danger btn-sm" (click)="startRecording()">
               Start Recording
             </button>
